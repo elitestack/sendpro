@@ -1,0 +1,819 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>ACADEMIC REPORT CARD</title>
+        <style>
+            /* ====== BASE STYLES ====== */
+            * { 
+                margin: 0; 
+                padding: 0; 
+                box-sizing: border-box; 
+            }
+            
+            body { 
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+                font-size: 11pt; 
+                line-height: 1.6; 
+                color: #333;
+                background: #f5f5f5;
+            }
+            
+            .container { 
+                width: 210mm; 
+                min-height: 297mm; 
+                margin: 0 auto; 
+                padding: 15mm; 
+                background: white;
+                box-shadow: 0 0 20px rgba(0,0,0,0.1);
+                position: relative;
+            }
+            
+            /* ====== HEADER & SCHOOL BRANDING ====== */
+            .header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 25px;
+                padding-bottom: 20px;
+                border-bottom: 3px solid #2c3e50;
+            }
+            
+            .school-info {
+                flex: 1;
+            }
+            
+            .school-logo-container {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+            
+            .school-logo {
+                max-width: 80px;
+                height: auto;
+                border-radius: 5px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            
+            .school-name {
+                font-size: 24pt;
+                font-weight: 700;
+                color: #2c3e50;
+                margin-bottom: 5px;
+                letter-spacing: 1px;
+            }
+            
+            .school-motto {
+                font-size: 12pt;
+                font-style: italic;
+                color: #7f8c8d;
+                margin-bottom: 8px;
+            }
+            
+            .school-details {
+                font-size: 10pt;
+                color: #34495e;
+                line-height: 1.4;
+            }
+            
+            .school-details div {
+                margin-bottom: 3px;
+            }
+            
+            .report-title {
+                text-align: center;
+                margin: 20px 0;
+                padding: 15px;
+                background: linear-gradient(135deg, #3498db, #2c3e50);
+                color: white;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(52, 152, 219, 0.3);
+            }
+            
+            .report-title h1 {
+                font-size: 18pt;
+                margin-bottom: 5px;
+            }
+            
+            .report-title .subtitle {
+                font-size: 11pt;
+                opacity: 0.9;
+            }
+            
+            /* ====== STUDENT PROFILE SECTION ====== */
+            .student-profile {
+                display: flex;
+                gap: 30px;
+                margin: 25px 0;
+                padding: 20px;
+                background: #f8f9fa;
+                border-radius: 10px;
+                border: 1px solid #e9ecef;
+            }
+            
+            .student-photo-container {
+                flex-shrink: 0;
+                width: 150px;
+                text-align: center;
+            }
+            
+            .student-photo {
+                width: 120px;
+                height: 160px;
+                object-fit: cover;
+                border-radius: 8px;
+                border: 3px solid #3498db;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                background: #ecf0f1;
+            }
+            
+            .student-photo-placeholder {
+                width: 120px;
+                height: 160px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(135deg, #ecf0f1, #bdc3c7);
+                border-radius: 8px;
+                border: 3px dashed #95a5a6;
+                color: #7f8c8d;
+                font-size: 10pt;
+                text-align: center;
+                padding: 10px;
+            }
+            
+            .student-info {
+                flex: 1;
+            }
+            
+            .student-info h3 {
+                color: #2c3e50;
+                margin-bottom: 15px;
+                padding-bottom: 8px;
+                border-bottom: 2px solid #3498db;
+                font-size: 14pt;
+            }
+            
+            .info-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            
+            .info-item {
+                display: flex;
+                align-items: center;
+                padding: 8px 0;
+                border-bottom: 1px dashed #ddd;
+            }
+            
+            .info-label {
+                font-weight: 600;
+                color: #2c3e50;
+                min-width: 140px;
+            }
+            
+            .info-value {
+                color: #34495e;
+            }
+            
+            /* ====== ACADEMIC SESSION INFO ====== */
+            .session-info {
+                background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+                padding: 15px;
+                border-radius: 8px;
+                margin: 20px 0;
+                display: flex;
+                justify-content: space-around;
+                text-align: center;
+                border: 1px solid #90caf9;
+            }
+            
+            .session-item {
+                padding: 10px;
+            }
+            
+            .session-label {
+                font-size: 10pt;
+                color: #1565c0;
+                font-weight: 600;
+                margin-bottom: 5px;
+            }
+            
+            .session-value {
+                font-size: 12pt;
+                color: #0d47a1;
+                font-weight: 700;
+            }
+            
+            /* ====== RESULTS TABLE ====== */
+            .results-section {
+                margin: 30px 0;
+            }
+            
+            .section-title {
+                background: linear-gradient(135deg, #27ae60, #229954);
+                color: white;
+                padding: 12px 20px;
+                border-radius: 6px 6px 0 0;
+                font-size: 14pt;
+                font-weight: 600;
+                margin-bottom: 0;
+            }
+            
+            .results-table {
+                width: 100%;
+                border-collapse: collapse;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            }
+            
+            .results-table thead {
+                background: linear-gradient(135deg, #2c3e50, #34495e);
+                color: white;
+            }
+            
+            .results-table th {
+                padding: 12px 8px;
+                text-align: center;
+                font-weight: 600;
+                border: none;
+                font-size: 10pt;
+            }
+            
+            .results-table tbody tr {
+                border-bottom: 1px solid #e8e8e8;
+                transition: background 0.3s;
+            }
+            
+            .results-table tbody tr:nth-child(even) {
+                background: #f8f9fa;
+            }
+            
+            .results-table tbody tr:hover {
+                background: #e3f2fd;
+            }
+            
+            .results-table td {
+                padding: 10px 8px;
+                text-align: center;
+                border: none;
+            }
+            
+            .subject-name {
+                text-align: left;
+                font-weight: 600;
+                color: #2c3e50;
+            }
+            
+            .grade-cell {
+                font-weight: 700;
+                font-size: 11pt;
+                border-radius: 4px;
+                padding: 5px 10px;
+                display: inline-block;
+                min-width: 40px;
+            }
+            
+            .grade-A { background: #d4edda; color: #155724; }
+            .grade-B { background: #d1ecf1; color: #0c5460; }
+            .grade-C { background: #fff3cd; color: #856404; }
+            .grade-D { background: #f8d7da; color: #721c24; }
+            .grade-F { background: #dc3545; color: white; }
+            
+            .remark-cell {
+                font-style: italic;
+                color: #555;
+            }
+            
+            /* ====== ACADEMIC SUMMARY ====== */
+            .summary-section {
+                background: linear-gradient(135deg, #fff9c4, #fff59d);
+                border-radius: 8px;
+                padding: 20px;
+                margin: 25px 0;
+                border: 1px solid #ffd54f;
+            }
+            
+            .summary-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                margin-top: 15px;
+            }
+            
+            .summary-item {
+                background: white;
+                padding: 15px;
+                border-radius: 6px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+                border-left: 4px solid #3498db;
+            }
+            
+            .summary-label {
+                font-size: 10pt;
+                color: #7f8c8d;
+                margin-bottom: 5px;
+            }
+            
+            .summary-value {
+                font-size: 16pt;
+                font-weight: 700;
+                color: #2c3e50;
+            }
+            
+            .summary-value.grade {
+                font-size: 20pt;
+                color: #e74c3c;
+            }
+            
+            .summary-value.position {
+                font-size: 18pt;
+                color: #27ae60;
+            }
+            
+            /* ====== COMMENTS SECTION ====== */
+            .comments-section {
+                margin: 25px 0;
+            }
+            
+            .comment-box {
+                background: white;
+                border-radius: 8px;
+                padding: 20px;
+                margin-bottom: 15px;
+                border: 1px solid #e0e0e0;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            }
+            
+            .comment-title {
+                color: #2c3e50;
+                font-weight: 600;
+                margin-bottom: 10px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            
+            .comment-title i {
+                color: #3498db;
+            }
+            
+            .comment-content {
+                padding: 15px;
+                background: #f8f9fa;
+                border-radius: 6px;
+                font-style: italic;
+                color: #555;
+                border-left: 3px solid #3498db;
+            }
+            
+            /* ====== PSYCHOMOTOR & AFFECTIVE ====== */
+            .skills-section {
+                margin: 25px 0;
+            }
+            
+            .skills-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .skill-category {
+                background: white;
+                border-radius: 8px;
+                padding: 20px;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+                border: 1px solid #e0e0e0;
+            }
+            
+            .skill-category h4 {
+                color: #2c3e50;
+                margin-bottom: 15px;
+                padding-bottom: 8px;
+                border-bottom: 2px solid #9b59b6;
+            }
+            
+            .skill-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 8px 0;
+                border-bottom: 1px dashed #eee;
+            }
+            
+            .skill-name {
+                color: #34495e;
+            }
+            
+            .skill-rating {
+                padding: 4px 12px;
+                border-radius: 20px;
+                font-size: 10pt;
+                font-weight: 600;
+            }
+            
+            .rating-excellent { background: #d4edda; color: #155724; }
+            .rating-very-good { background: #cce5ff; color: #004085; }
+            .rating-good { background: #d1ecf1; color: #0c5460; }
+            .rating-fair { background: #fff3cd; color: #856404; }
+            .rating-poor { background: #f8d7da; color: #721c24; }
+            
+            /* ====== SIGNATURES ====== */
+            .signature-section {
+                margin-top: 40px;
+                padding-top: 25px;
+                border-top: 2px solid #2c3e50;
+            }
+            
+            .signature-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .signature-box {
+                padding: 20px;
+            }
+            
+            .signature-title {
+                font-weight: 600;
+                color: #2c3e50;
+                margin-bottom: 15px;
+            }
+            
+            .signature-line {
+                height: 1px;
+                background: #333;
+                margin: 30px auto 10px;
+                width: 80%;
+            }
+            
+            .signature-name {
+                margin-top: 40px;
+                font-weight: 600;
+                color: #2c3e50;
+            }
+            
+            .date-box {
+                background: #f8f9fa;
+                padding: 15px;
+                border-radius: 6px;
+                border: 1px solid #ddd;
+            }
+            
+            .date-label {
+                color: #7f8c8d;
+                font-size: 10pt;
+                margin-bottom: 5px;
+            }
+            
+            .date-value {
+                font-weight: 700;
+                color: #2c3e50;
+                font-size: 12pt;
+            }
+            
+            /* ====== FOOTER & WATERMARK ====== */
+            .footer {
+                margin-top: 40px;
+                text-align: center;
+                padding: 15px;
+                background: #2c3e50;
+                color: white;
+                border-radius: 6px;
+                font-size: 9pt;
+            }
+            
+            .watermark {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) rotate(-45deg);
+                font-size: 60pt;
+                color: rgba(0,0,0,0.05);
+                z-index: -1;
+                font-weight: bold;
+                letter-spacing: 5px;
+            }
+            
+            .verification-code {
+                background: linear-gradient(135deg, #3498db, #2980b9);
+                color: white;
+                padding: 10px;
+                border-radius: 4px;
+                font-family: monospace;
+                font-size: 10pt;
+                letter-spacing: 1px;
+                margin-top: 10px;
+            }
+            
+            /* ====== PRINT STYLES ====== */
+            @media print {
+                body { 
+                    background: white; 
+                    -webkit-print-color-adjust: exact !important;
+                    print-color-adjust: exact !important;
+                }
+                .container { 
+                    width: 100%; 
+                    height: 100%; 
+                    margin: 0; 
+                    padding: 10mm; 
+                    box-shadow: none; 
+                }
+                .no-print { display: none; }
+                .watermark { opacity: 0.1; }
+            }
+            
+            /* ====== UTILITY CLASSES ====== */
+            .text-center { text-align: center; }
+            .text-right { text-align: right; }
+            .mb-10 { margin-bottom: 10px; }
+            .mb-20 { margin-bottom: 20px; }
+            .mt-20 { margin-top: 20px; }
+            .mt-30 { margin-top: 30px; }
+        </style>
+    </head>
+    <body>
+        <div class="watermark">OFFICIAL</div>
+        <div class="container">
+            
+            <!-- ===== HEADER WITH SCHOOL BRANDING ===== -->
+            <div class="header">
+                <div class="school-info">
+                    <div class="school-logo-container">
+                        {% if school.logo %}
+                        <img src="{{ school.logo }}" alt="School Logo" class="school-logo">
+                        {% else %}
+                        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #3498db, #2c3e50); border-radius: 5px; display: inline-block;"></div>
+                        {% endif %}
+                    </div>
+                    <div class="school-name">{{ school.name }}</div>
+                    <div class="school-motto">"{{ school.motto }}"</div>
+                    <div class="school-details">
+                        <div>{{ school.address }}</div>
+                        <div>Phone: {{ school.phone }} | Email: {{ school.email }}</div>
+                        <div>Website: {{ school.website }}</div>
+                    </div>
+                </div>
+                
+                <div class="report-title">
+                    <h1>ACADEMIC REPORT CARD</h1>
+                    <div class="subtitle">
+                        Session: {{ session.name }} | Term: {{ term.name }}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ===== STUDENT PROFILE SECTION ===== -->
+            <div class="student-profile">
+                <div class="student-photo-container">
+                    {% if student.passport_photo %}
+                    <img src="{{ student.passport_photo }}" alt="Student Photo" class="student-photo">
+                    {% else %}
+                    <div class="student-photo-placeholder">
+                        Passport Photo<br>120x160px
+                    </div>
+                    {% endif %}
+                    <div style="font-size: 9pt; color: #7f8c8d; margin-top: 8px;">
+                        Reg No: {{ student.reg_no }}
+                    </div>
+                </div>
+                
+                <div class="student-info">
+                    <h3>STUDENT INFORMATION</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Full Name:</div>
+                            <div class="info-value">{{ student.name }}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Class:</div>
+                            <div class="info-value">{{ student.class }}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Gender:</div>
+                            <div class="info-value">{{ student.gender }}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Date of Birth:</div>
+                            <div class="info-value">{{ student.dob }}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Age:</div>
+                            <div class="info-value">{{ student.age }} years</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Academic Year:</div>
+                            <div class="info-value">{{ session.name }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ===== ACADEMIC SESSION INFO ===== -->
+            <div class="session-info">
+                <div class="session-item">
+                    <div class="session-label">ACADEMIC SESSION</div>
+                    <div class="session-value">{{ session.name }}</div>
+                </div>
+                <div class="session-item">
+                    <div class="session-label">TERM</div>
+                    <div class="session-value">{{ term.name }}</div>
+                </div>
+                <div class="session-item">
+                    <div class="session-label">REPORT DATE</div>
+                    <div class="session-value">{{ summary.report_date }}</div>
+                </div>
+                <div class="session-item">
+                    <div class="session-label">TOTAL SUBJECTS</div>
+                    <div class="session-value">{{ summary.total_subjects }}</div>
+                </div>
+            </div>
+            
+            <!-- ===== ACADEMIC PERFORMANCE TABLE ===== -->
+            <div class="results-section">
+                <h3 class="section-title">ACADEMIC PERFORMANCE</h3>
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th style="text-align: left;">SUBJECT</th>
+                            <th>CA SCORE</th>
+                            <th>EXAM SCORE</th>
+                            <th>TOTAL</th>
+                            <th>GRADE</th>
+                            <th>REMARK</th>
+                            <th>POSITION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for subject in subjects %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td class="subject-name">{{ subject.name }}</td>
+                            <td>{{ subject.ca_score }}</td>
+                            <td>{{ subject.exam_score }}</td>
+                            <td><strong>{{ subject.total }}</strong></td>
+                            <td>
+                                <span class="grade-cell grade-{{ subject.grade[0] if subject.grade else 'F' }}">
+                                    {{ subject.grade }}
+                                </span>
+                            </td>
+                            <td class="remark-cell">{{ subject.remark }}</td>
+                            <td>{{ subject.position if subject.position else '-' }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- ===== ACADEMIC SUMMARY ===== -->
+            <div class="summary-section">
+                <h3 style="color: #2c3e50; margin-bottom: 15px;">ACADEMIC SUMMARY</h3>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <div class="summary-label">Total Score</div>
+                        <div class="summary-value">{{ summary.total_score }}</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">Average Score</div>
+                        <div class="summary-value">{{ summary.average_score }}</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">Overall Grade</div>
+                        <div class="summary-value grade">{{ summary.overall_grade }}</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">Class Position</div>
+                        <div class="summary-value position">{{ summary.class_position }}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ===== COMMENTS SECTION ===== -->
+            <div class="comments-section">
+                <h3 class="section-title" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">COMMENTS & REMARKS</h3>
+                <div class="skills-grid">
+                    <div class="comment-box">
+                        <div class="comment-title">
+                            <span style="color: #3498db;">●</span> Class Teacher's Comment
+                        </div>
+                        <div class="comment-content">
+                            {{ summary.teacher_comment }}
+                        </div>
+                    </div>
+                    <div class="comment-box">
+                        <div class="comment-title">
+                            <span style="color: #e74c3c;">●</span> Principal's Comment
+                        </div>
+                        <div class="comment-content">
+                            {{ summary.principal_comment }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ===== PSYCHOMOTOR & AFFECTIVE SKILLS ===== -->
+            {% if psychomotor or affective %}
+            <div class="skills-section">
+                <h3 class="section-title" style="background: linear-gradient(135deg, #e67e22, #d35400);">SKILLS ASSESSMENT</h3>
+                <div class="skills-grid">
+                    {% if psychomotor %}
+                    <div class="skill-category">
+                        <h4>PSYCHOMOTOR SKILLS</h4>
+                        {% for skill, rating in psychomotor.items() %}
+                        <div class="skill-item">
+                            <div class="skill-name">{{ skill }}</div>
+                            <div class="skill-rating rating-{{ rating|lower|replace(' ', '-') }}">
+                                {{ rating }}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    
+                    {% if affective %}
+                    <div class="skill-category">
+                        <h4>AFFECTIVE DOMAIN</h4>
+                        {% for skill, rating in affective.items() %}
+                        <div class="skill-item">
+                            <div class="skill-name">{{ skill }}</div>
+                            <div class="skill-rating rating-{{ rating|lower|replace(' ', '-') }}">
+                                {{ rating }}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+            
+            <!-- ===== SIGNATURES SECTION ===== -->
+            <div class="signature-section">
+                <h3 class="section-title" style="background: linear-gradient(135deg, #34495e, #2c3e50);">AUTHENTICATION</h3>
+                <div class="signature-grid">
+                    <div class="signature-box">
+                        <div class="signature-title">Class Teacher</div>
+                        <div class="signature-line"></div>
+                        <div class="signature-name">Mrs. A. Johnson</div>
+                        <div style="font-size: 9pt; color: #7f8c8d; margin-top: 5px;">
+                            Signature & Stamp
+                        </div>
+                    </div>
+                    
+                    <div class="signature-box">
+                        <div class="signature-title">Head of School</div>
+                        <div class="signature-line"></div>
+                        <div class="signature-name">Dr. K. Williams</div>
+                        <div style="font-size: 9pt; color: #7f8c8d; margin-top: 5px;">
+                            Signature & Stamp
+                        </div>
+                    </div>
+                    
+                    <div class="date-box">
+                        <div class="date-label">Date of Issue</div>
+                        <div class="date-value">{{ summary.report_date }}</div>
+                        <div class="verification-code">
+                            ID: {{ student.reg_no }}-{{ term.id }}-{{ session.id }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ===== FOOTER ===== -->
+            <div class="footer">
+                <div>This is an official document generated electronically by {{ school.name }}.</div>
+                <div style="margin-top: 8px; opacity: 0.8;">
+                    Report generated on {{ summary.report_date }} • Document ID: {{ student.reg_no }}-{{ term.id }}-{{ session.id }}
+                </div>
+                <div class="no-print" style="margin-top: 10px; font-size: 8pt; opacity: 0.6;">
+                    Verify this report online at: {{ school.website }}/verify
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- ===== PRINT BUTTON (For Browser Preview) ===== -->
+        <div class="no-print" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+            <button onclick="window.print()" style="
+                background: linear-gradient(135deg, #27ae60, #229954);
+                color: white;
+                border: none;
+                padding: 12px 24px;
+                border-radius: 50px;
+                font-weight: 600;
+                cursor: pointer;
+                box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+                transition: all 0.3s;
+            " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(39, 174, 96, 0.4)';" 
+            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(39, 174, 96, 0.3)';">
+                🖨️ Print Report
+            </button>
+        </div>
+        
+    </body>
+    </html>
+    
